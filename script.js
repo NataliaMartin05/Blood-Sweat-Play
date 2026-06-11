@@ -106,3 +106,38 @@ function createBoard(){
   }
 
 }
+
+function updateBoard(){
+
+  document
+    .querySelectorAll(".player")
+    .forEach(x=>x.remove());
+
+  players.forEach(player=>{
+
+    const token =
+      document.createElement("div");
+
+    token.className = "player";
+
+    token.innerHTML = "😈";
+
+    document
+      .getElementById("cell-0")
+      .appendChild(token);
+
+  });
+
+}
+
+function rollDice(){
+
+  const dice =
+    Math.floor(Math.random()*6)+1;
+
+  document
+    .getElementById("diceResult")
+    .innerText =
+      "Has sacado un " + dice;
+
+}
