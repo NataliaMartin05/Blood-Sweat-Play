@@ -1,6 +1,21 @@
 let roomCode = "";
 let players = [];
 
+const availableTokens = [
+
+  "😈","👻","💀","🤡","👽","🤖",
+
+  "🐸","🐧","🦆","🦈","🐙","🦀",
+  "🦊","🐺","🐼","🦝","🐢","🦖",
+
+  "🍺","🍷","🍕","🍔","🌮","🍩",
+
+  "🔥","⚡","💣","🎲","🎯","🏆"
+
+];
+
+let selectedToken = null;
+
 function randomCode() {
 
   const chars =
@@ -39,6 +54,7 @@ function createRoom(){
     roomCode;
 
   updateLobby();
+  renderTokens();
 }
 
 function joinRoom(){
@@ -113,7 +129,8 @@ function updateBoard(){
 
     token.className = "player";
 
-    token.innerHTML = "😈";
+    token.innerHTML =
+  selectedToken || "😈";
 
     document
       .getElementById("cell-0")
