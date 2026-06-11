@@ -1,18 +1,53 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="UTF-8">
-<title>Blood, Sweat & Play</title>
-<link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <title>Blood, Sweat & Play</title>
+  <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
 
-<h1>🩸 Blood, Sweat & Play 🍻</h1>
+<div id="menu">
 
-<p>Próximamente...</p>
+  <h1>🩸 Blood, Sweat & Play 🍻</h1>
 
-<button onclick="saludar()">Púlsame</button>
+  <input
+    id="playerName"
+    type="text"
+    placeholder="Tu nombre"
+  >
+
+  <br><br>
+
+  <button onclick="createRoom()">
+    Crear sala
+  </button>
+
+  <hr>
+
+  <input
+    id="roomCode"
+    type="text"
+    placeholder="Código"
+  >
+
+  <button onclick="joinRoom()">
+    Unirse
+  </button>
+
+</div>
+
+<div id="lobby" style="display:none;">
+
+  <h2>Sala: <span id="roomName"></span></h2>
+
+  <p id="playerList"></p>
+
+  <button id="startButton" onclick="startGame()">
+    🚀 Empezar partida
+  </button>
+
+</div>
 
 <script src="script.js"></script>
 
