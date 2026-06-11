@@ -1,3 +1,70 @@
-function saludar() {
-  alert("El juego está vivo 😈");
+let roomCode = "";
+let players = [];
+
+function randomCode() {
+
+  const chars =
+    "ABCDEFGHJKLMNPQRSTUVWXYZ123456789";
+
+  let code = "";
+
+  for(let i=0;i<4;i++){
+    code += chars[Math.floor(Math.random()*chars.length)];
+  }
+
+  return code;
+}
+
+function createRoom(){
+
+  const name =
+    document.getElementById("playerName").value;
+
+  if(!name){
+    alert("Pon tu nombre");
+    return;
+  }
+
+  roomCode = randomCode();
+
+  players = [name];
+
+  document.getElementById("menu").style.display =
+    "none";
+
+  document.getElementById("lobby").style.display =
+    "block";
+
+  document.getElementById("roomName").innerText =
+    roomCode;
+
+  updateLobby();
+}
+
+function joinRoom(){
+
+  alert(
+    "Todavía no funciona. Lo conectaremos con Firebase."
+  );
+
+}
+
+function updateLobby(){
+
+  let text = "";
+
+  players.forEach(player=>{
+    text += "🎮 " + player + "<br>";
+  });
+
+  document.getElementById("playerList").innerHTML =
+    text;
+}
+
+function startGame(){
+
+  alert(
+    "Aquí empezará la partida."
+  );
+
 }
