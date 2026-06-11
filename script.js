@@ -54,6 +54,43 @@ function createRoom(){
     roomCode;
 
   updateLobby();
+  function renderTokens(){
+
+  const container =
+    document.getElementById("tokenSelector");
+
+  container.innerHTML = "";
+
+  availableTokens.forEach(token=>{
+
+    const div =
+      document.createElement("div");
+
+    div.className = "token";
+
+    div.innerHTML = token;
+
+    div.onclick = ()=>{
+
+      selectedToken = token;
+
+      document
+        .getElementById("chosenToken")
+        .innerText = token;
+
+      document
+        .querySelectorAll(".token")
+        .forEach(t=>t.classList.remove("selected"));
+
+      div.classList.add("selected");
+
+    };
+
+    container.appendChild(div);
+
+  });
+
+}
   renderTokens();
 }
 
