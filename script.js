@@ -68,3 +68,17 @@ function startGame(){
   );
 
 }
+
+function startGame(){
+
+  document.getElementById("lobby").style.display =
+    "none";
+
+  document.getElementById("game").style.display =
+    "block";
+
+  createBoard();
+
+  updateBoard();
+
+}
