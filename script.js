@@ -1,1 +1,3 @@
-console.log("Blood, Sweat & Play iniciado");
+function saludar() {
+  alert("El juego está vivo 😈");
+}
