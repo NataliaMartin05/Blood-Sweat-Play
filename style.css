@@ -26,3 +26,42 @@ button{
   cursor:pointer;
 
 }
+
+#board{
+
+  display:grid;
+  grid-template-columns:repeat(10,60px);
+
+  gap:4px;
+
+  justify-content:center;
+
+  margin-top:20px;
+
+}
+
+.cell{
+
+  width:60px;
+  height:60px;
+
+  background:#222;
+
+  border:1px solid #444;
+
+  display:flex;
+
+  justify-content:center;
+  align-items:center;
+
+  position:relative;
+
+}
+
+.player{
+
+  position:absolute;
+
+  font-size:22px;
+
+}
