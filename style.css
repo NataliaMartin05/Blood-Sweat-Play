@@ -65,3 +65,44 @@ button{
   font-size:22px;
 
 }
+
+#tokenSelector{
+
+  display:flex;
+  flex-wrap:wrap;
+
+  justify-content:center;
+
+  gap:8px;
+
+  max-width:600px;
+
+  margin:auto;
+
+}
+
+.token{
+
+  font-size:28px;
+
+  cursor:pointer;
+
+  padding:8px;
+
+  border:2px solid transparent;
+
+  border-radius:10px;
+
+}
+
+.token:hover{
+
+  background:#222;
+
+}
+
+.selected{
+
+  border:2px solid gold;
+
+}
