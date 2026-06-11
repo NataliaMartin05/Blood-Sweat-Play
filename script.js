@@ -61,13 +61,6 @@ function updateLobby(){
     text;
 }
 
-function startGame(){
-
-  alert(
-    "Aquí empezará la partida."
-  );
-
-}
 
 function startGame(){
 
