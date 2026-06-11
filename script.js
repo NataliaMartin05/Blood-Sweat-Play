@@ -82,3 +82,27 @@ function startGame(){
   updateBoard();
 
 }
+
+function createBoard(){
+
+  const board =
+    document.getElementById("board");
+
+  board.innerHTML = "";
+
+  for(let i=69;i>=0;i--){
+
+    const cell =
+      document.createElement("div");
+
+    cell.className = "cell";
+
+    cell.id = "cell-" + i;
+
+    cell.innerHTML = i;
+
+    board.appendChild(cell);
+
+  }
+
+}
