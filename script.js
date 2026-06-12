@@ -187,7 +187,7 @@ function rollDice(){
       "Has sacado un " + dice;
 
   updateBoard();
-  victory(player);
+  if(player.position = 69){victory(player);}
   return;
 }
 
