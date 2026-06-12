@@ -235,6 +235,31 @@ function generateBoardTypes(){
   assign("tablero",10);
 }
 
+// Movimiento animado de las fichas
+function animateMove(player, steps){
+  let moved = 0;
+  const interval = setInterval(()=>{player.position++;
+    moved++;
+    if(player.position > 69){
+      player.position = 69;}
+
+    updateBoard();
+
+    if(moved >= steps ||
+      player.position >= 69){
+
+      clearInterval(interval);
+
+      // Comprobamos victoria
+      if(player.position >= 69){victory(player);}
+
+      else{checkCell(player);}
+
+    }
+
+  }, 250); //250ms es el tiempo que tarda en cada paso
+
+}
 
 // Tiramos el dado
 function rollDice(){
@@ -256,14 +281,13 @@ function rollDice(){
     .innerText =
       "Has sacado un " + dice;
 
-  updateBoard();
-
-  checkCell(player);
+  animateMove(player, dice);
+  
   if(player.position == 69){victory(player);}
   return;
 }
 
-// Popup de visctoria
+// Popup de victoria
 function victory(player){
 
   document
