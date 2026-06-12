@@ -1,5 +1,6 @@
 let roomCode = "";
 let players = [];
+let cellTypes = {};
 //fichas en el tablero disponibles
 const availableTokens = ["😈","👻","💀","🤡","👽","🤖","🐸","🐧","🦆","🦈","🐙","🦀",
                          "🦊","🐺","🐼","🦝","🐢","🦖","🍺","🍷","🍕","🍔","🌮","🍩",
@@ -112,6 +113,8 @@ function startGame(){
   document.getElementById("game").style.display =
     "block";
 
+  generateBoardTypes(); // Asiganmos de forma random las casillas
+  
   createBoard(); // Creamos el tablero
 
   updateBoard(); // Lo actualizamos
@@ -119,7 +122,6 @@ function startGame(){
 }
 
 function createBoard(){
-
   const board =
     document.getElementById("board");
 
@@ -131,7 +133,11 @@ function createBoard(){
       document.createElement("div");
 
     cell.className = "cell";
-
+    
+    const type = cellTypes[i];
+    
+    if(type){cell.classList.add(type);}
+    
     cell.id = "cell-" + i;
 
     cell.innerHTML = i;
@@ -165,6 +171,34 @@ function updateBoard(){
   });
 
 }
+
+// Generamos tipos de casillas
+function generateBoardTypes(){
+  cellTypes = {};
+  let availableCells = [];
+
+  // Casillas 1-69
+  for(let i=1;i<=69;i++){
+    availableCells.push(i);
+  }
+
+  function assign(type, amount){
+    for(let i=0;i<amount;i++){
+      const randomIndex =
+        Math.floor(Math.random()*availableCells.length);
+
+      const cell =
+        availableCells[randomIndex];
+
+      cellTypes[cell] = type;
+      availableCells.splice(randomIndex,1);
+    }
+  }
+  assign("reto",25);
+  assign("especial",18);
+  assign("tablero",10);
+}
+
 
 // Tiramos el dado
 function rollDice(){
