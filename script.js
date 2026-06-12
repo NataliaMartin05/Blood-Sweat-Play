@@ -255,7 +255,7 @@ function animateMove(player, steps){
       setTimeout(()=>{
         if(player.position >= 69){victory(player);}
         else{checkCell(player);}
-      }, 500);
+      }, 1000);
 
       
   }, 350); //350ms es el tiempo que tarda en cada paso
