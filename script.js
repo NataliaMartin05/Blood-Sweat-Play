@@ -97,8 +97,8 @@ function updateLobby(){
   let text = "";
 
   players.forEach(player=>{
-    text += "🎮 " + player + "<br>";
-  });
+    text += "🎮 " + player.name + "<br>";
+});
 
   document.getElementById("playerList").innerHTML =
     text;
@@ -180,11 +180,28 @@ function rollDice(){
   if(player.position > 69){player.position = 69;} // Evitamos que el jugador se salga del tablero
   // Este comando implica que no hace falta sacar el número justo para entrar, solo el valor igual
   // o mayor a las casillas que faltan (no se rebota)
-
+  
   document
     .getElementById("diceResult")
     .innerText =
       "Has sacado un " + dice;
 
   updateBoard();
+  victory(player);
+  return;
+}
+
+// Popup de visctoria
+function victory(player){
+
+  document
+    .getElementById("winnerText")
+    .innerText =
+      player.name + " ha ganado";
+
+  document
+    .getElementById("victoryPopup")
+    .style.display =
+      "flex";
+
 }
