@@ -154,3 +154,16 @@ button{
   margin-top:0;
 
 }
+
+.reto{
+  background:#c62828;
+}
+
+.especial{
+  background:#7b1fa2;
+}
+
+.tablero{
+  background:white;
+  color:black;
+}
