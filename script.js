@@ -1,3 +1,4 @@
+alert("script cargado");
 let roomCode = "";
 let players = [];
 let cellTypes = {};
