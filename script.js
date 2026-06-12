@@ -1,3 +1,4 @@
+let moving = false;
 let roomCode = "";
 let players = [];
 let cellTypes = {};
@@ -238,6 +239,7 @@ function generateBoardTypes(){
 
 // Movimiento animado de las fichas
 function animateMove(player, steps){
+  console.log("ANIMATE", steps);
   let moved = 0;
   const interval = setInterval(()=>{
     if(player.position < 69){
@@ -255,7 +257,8 @@ function animateMove(player, steps){
       setTimeout(()=>{
         if(player.position >= 69){victory(player);}
         else{checkCell(player);}
-      }, 3000);
+        moving = false;},
+      3000);
 
       return;
     } 
@@ -265,7 +268,13 @@ function animateMove(player, steps){
 
 // Tiramos el dado
 function rollDice(){
+  console.log("ROLL");
+  if(moving){
+    return;
+  }
 
+  moving = true;
+  
   const dice =
     Math.floor(Math.random()*6)+1;
 
@@ -311,6 +320,7 @@ function victory(player){
 
 // Checkeamos en que casilla hemos caido
 function checkCell(player){
+  console.log("CHECK", player.position);
   const type = cellTypes[player.position];
 
   if(!type){return;}
@@ -333,6 +343,7 @@ function checkCell(player){
 
 // Enseñamos el reto
 function showChallenge(challenge){
+  console.log("SHOW CHALLENGE");
   currentChallenge = challenge;
   
   document
