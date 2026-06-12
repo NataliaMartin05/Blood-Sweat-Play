@@ -43,6 +43,7 @@ const availableTokens = ["😈","👻","💀","🤡","👽","🤖","🐸","🐧"
                          "🔥","⚡","💣","🎲","🎯","🏆"];
 
 let selectedToken = null;
+let currentChallenge = null;
 
 // Creamos el codigo de la sala
 function randomCode() {
@@ -319,10 +320,7 @@ function checkCell(player){
     const challenge =
       getRandomChallenge();
 
-    alert(
-      "🎯 RETO\n\n" +
-      challenge
-    );
+    showChallenge(challenge);
 
     return;
 
@@ -332,3 +330,33 @@ function checkCell(player){
   alert("Has caído en una casilla " + type);
 
 }
+
+// Enseñamos el reto
+function showChallenge(challenge){
+  currentChallenge = challenge;
+  
+  document
+    .getElementById("challengeText")
+    .innerText =
+      challenge;
+
+  document
+    .getElementById("challengePopup")
+    .style.display =
+      "flex";
+
+}
+
+//cerramos la ventana
+function closeChallenge(success){
+
+  document
+    .getElementById("challengePopup")
+    .style.display =
+      "none";
+
+  if(success){alert("😎 Reto completado");}
+  else{alert("🍺 Penalización pendiente");}
+
+}
+
