@@ -252,13 +252,12 @@ function animateMove(player, steps){
 
       clearInterval(interval);
 
-      // Comprobamos victoria
-      if(player.position >= 69){victory(player);}
+      setTimeout(()=>{
+        if(player.position >= 69){victory(player);}
+        else{checkCell(player);}
+      }, 500);
 
-      else{checkCell(player);}
-
-    }
-
+      
   }, 350); //350ms es el tiempo que tarda en cada paso
 
 }
