@@ -7,10 +7,10 @@
 </head>
 <body>
 
-<div id="menu">
+<div id="menu"> // Se crea el menú principal
 
-  <h1>🩸 Blood, Sweat & Play 🍻</h1>
-
+  <h1>🩸 Blood, Sweat & Play 🍻</h1> // Título
+  // Campos a rellenar
   <input
     id="playerName"
     type="text"
@@ -18,25 +18,25 @@
   >
 
   <br><br>
-
+  // Botón crear sala
   <button onclick="createRoom()">
     Crear sala
   </button>
 
   <hr>
-
+  // Campos a rellenar
   <input
     id="roomCode"
     type="text"
     placeholder="Código"
   >
-
+  // Botón unirse a sala
   <button onclick="joinRoom()">
     Unirse
   </button>
 
 </div>
-
+// Creamos el lobby
 <div id="lobby" style="display:none;">
 
   <h2>Sala: <span id="roomName"></span></h2>
@@ -52,6 +52,7 @@
   
   <p id="playerList"></p>
 
+  // Botón start
   <button id="startButton" onclick="startGame()">
     🚀 Empezar partida
   </button>
@@ -61,7 +62,7 @@
 <div id="game" style="display:none;">
 
   <h2 id="turnText"></h2>
-
+  // Botón dado
   <button onclick="rollDice()">
     🎲 Tirar dado
   </button>
@@ -71,7 +72,22 @@
   <div id="board"></div>
 
 </div>
+  // Fin del juego
+  <div id="victoryPopup" style="display:none;">
 
+  <div id="victoryContent">
+
+    <h1>🏆 VICTORIA 🏆</h1>
+
+    <h2 id="winnerText"></h2>
+
+    <button onclick="location.reload()">
+      Nueva partida
+    </button>
+
+  </div>
+
+</div>
 
   <script src="script.js"></script>
 
