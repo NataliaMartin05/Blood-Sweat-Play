@@ -333,53 +333,39 @@ function checkCell(player){
   }
 
   if(type == "reto"){
-
-    const challenge =
-      getRandomChallenge();
-
+    const challenge = getRandomChallenge();
     showChallenge(challenge);
-
     return;
-
   }
 
   if(type == "especial"){
-
     showEvent(
       "⭐ CASILLA ESPECIAL ⭐",
       "Has robado una carta"
     );
-
     return;
-
   }
 
   if(type == "tablero"){
-
     currentPlayer = player;
-
     const events = [
+      {text:"⬅️ Retrocede 2 casillas",
+        action:"back2"},
 
-      {
-        text:"⬅️ Retrocede 2 casillas",
-        action:"back2"
-      },
+      {text:"➡️ Avanza 3 casillas",
+        action:"forward3"}
+    ];
 
-      {
-        text:"➡️ Avanza 3 casillas",
-        action:"forward3"
-      }
-   ];
-
-  const event =
-    events[Math.floor(Math.random()*events.length)];
-
-  pendingEvent = event.action;
-
-  showEvent("♟️ EVENTO ♟️",
-    event.text);
-
-  return;
+    const event =
+      events[Math.floor(Math.random()*events.length)];
+  
+    pendingEvent = event.action;
+  
+    showEvent("♟️ CASILLA DE EVENTO ♟️",
+      event.text
+    );
+  
+    return;
   }
 }
       
