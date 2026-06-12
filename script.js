@@ -1,48 +1,37 @@
 let roomCode = "";
 let players = [];
-
-const availableTokens = [
-
-  "😈","👻","💀","🤡","👽","🤖",
-
-  "🐸","🐧","🦆","🦈","🐙","🦀",
-  "🦊","🐺","🐼","🦝","🐢","🦖",
-
-  "🍺","🍷","🍕","🍔","🌮","🍩",
-
-  "🔥","⚡","💣","🎲","🎯","🏆"
-
-];
+//fichas en el tablero disponibles
+const availableTokens = ["😈","👻","💀","🤡","👽","🤖","🐸","🐧","🦆","🦈","🐙","🦀",
+                         "🦊","🐺","🐼","🦝","🐢","🦖","🍺","🍷","🍕","🍔","🌮","🍩",
+                         "🔥","⚡","💣","🎲","🎯","🏆"];
 
 let selectedToken = null;
 
+// Creamos el codigo de la sala
 function randomCode() {
-
   const chars =
-    "ABCDEFGHJKLMNPQRSTUVWXYZ123456789";
-
+    "ABCDEFGHJKLMNPQRSTUVWXYZ123456789"; //caracteres del codigo de sala
   let code = "";
 
-  for(let i=0;i<4;i++){
-    code += chars[Math.floor(Math.random()*chars.length)];
-  }
+  for(let i=0;i<4;i++){code += chars[Math.floor(Math.random()*chars.length)];}
 
   return code;
 }
 
+// Creamos la sala con todos los jugadores cada uno con su ficha sin repetir
 function createRoom(){
-
   const name =
-    document.getElementById("playerName").value;
+    document.getElementById("playerName").value; //Introducimos el nombre del jugador
 
-  if(!name){
-    alert("Pon tu nombre");
+  // No permitimos nombres vacios
+  if(!name){alert("Pon tu nombre");
     return;
   }
 
-  roomCode = randomCode();
+  roomCode = randomCode(); // Se genera el código de sala
 
-  players = [name];
+  players = [{name: name,
+  position: 0}]; //Se crea un jugador y se guarda su posición inicial (casilla start)
 
   document.getElementById("menu").style.display =
     "none";
@@ -53,57 +42,58 @@ function createRoom(){
   document.getElementById("roomName").innerText =
     roomCode;
 
-  updateLobby();
-  function renderTokens(){
+  updateLobby(); // se van añadiendo jugadores al lobby
 
-  const container =
-    document.getElementById("tokenSelector");
-
-  container.innerHTML = "";
-
-  availableTokens.forEach(token=>{
-
-    const div =
-      document.createElement("div");
-
-    div.className = "token";
-
-    div.innerHTML = token;
-
-    div.onclick = ()=>{
-
-      selectedToken = token;
-
-      document
-        .getElementById("chosenToken")
-        .innerText = token;
-
-      document
-        .querySelectorAll(".token")
-        .forEach(t=>t.classList.remove("selected"));
-
-      div.classList.add("selected");
-
-    };
-
-    container.appendChild(div);
-
-  });
-
-}
+// Actualizamos la lista de fichas
   renderTokens();
-}
+  
+} // Sala creada
 
+// Actualizamos la lista de fichas definiendo la función renderTokens()
+function renderTokens(){
+const container =
+  document.getElementById("tokenSelector"); // guardamos la ficha del jugador
+
+container.innerHTML = "";
+
+// Actualizamos la lista de fichas disponibles
+availableTokens.forEach(token=>{
+  const div =
+    document.createElement("div");
+
+  div.className = "token";
+
+  div.innerHTML = token;
+
+  div.onclick = ()=>{
+    selectedToken = token;
+
+    document
+      .getElementById("chosenToken")
+      .innerText = token;
+
+    document
+      .querySelectorAll(".token")
+      .forEach(t=>t.classList.remove("selected"));
+
+    div.classList.add("selected");
+  };
+
+  container.appendChild(div);
+
+});
+
+} 
+
+// Añadimos jugadores a la sala vía código (en desarrollo)
 function joinRoom(){
-
   alert(
     "Todavía no funciona. Lo conectaremos con Firebase."
   );
-
 }
 
+// Actualizamos el lobby
 function updateLobby(){
-
   let text = "";
 
   players.forEach(player=>{
@@ -114,18 +104,17 @@ function updateLobby(){
     text;
 }
 
-
+// Iniciamos el juego
 function startGame(){
-
   document.getElementById("lobby").style.display =
     "none";
 
   document.getElementById("game").style.display =
     "block";
 
-  createBoard();
+  createBoard(); // Creamos el tablero
 
-  updateBoard();
+  updateBoard(); // Lo actualizamos
 
 }
 
@@ -170,21 +159,32 @@ function updateBoard(){
   selectedToken || "😈";
 
     document
-      .getElementById("cell-0")
+      .getElementById("cell-" + player.position)
       .appendChild(token);
 
   });
 
 }
 
+// Tiramos el dado
 function rollDice(){
 
   const dice =
     Math.floor(Math.random()*6)+1;
+
+  const player =
+    players[0];
+
+  player.position += dice;
+
+  if(player.position > 69){player.position = 69;} // Evitamos que el jugador se salga del tablero
+  // Este comando implica que no hace falta sacar el número justo para entrar, solo el valor igual
+  // o mayor a las casillas que faltan (no se rebota)
 
   document
     .getElementById("diceResult")
     .innerText =
       "Has sacado un " + dice;
 
+  updateBoard();
 }
