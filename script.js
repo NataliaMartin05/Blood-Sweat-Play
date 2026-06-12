@@ -1,4 +1,3 @@
-alert("script cargado");
 let roomCode = "";
 let players = [];
 let cellTypes = {};
@@ -258,7 +257,7 @@ function animateMove(player, steps){
         else{checkCell(player);}
       }, 3000);}
 
-      
+      return, 
   }, 350); //350ms es el tiempo que tarda en cada paso
 
 }
