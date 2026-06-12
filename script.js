@@ -257,7 +257,7 @@ function animateMove(player, steps){
 
     }
 
-  }, 250); //250ms es el tiempo que tarda en cada paso
+  }, 350); //350ms es el tiempo que tarda en cada paso
 
 }
 
