@@ -8,15 +8,16 @@ const instantChallenges = [
   "📩 Enseña el último mensaje enviado",
   "🤥 Cuenta dos mentiras y una verdad",
   "🎤 Imita a un famoso hasta que alguien lo adivine",
-  "🎵 Canta una canción hasta que alguien la adivine",
+  "🎵 Tararea una canción hasta que alguien la adivine",
   "👀 Mantén contacto visual con alguien durante 10 segundos",
   "📸 Sube un selfie de grupo a stories",
   "🧠 Di 5 países en menos de 5 segundos",
+  "🍺Termina tu copa",
   "🥶 Habla con acento extranjero durante 30 segundos",
-  "💪 Haz 10 sentadillas",
-  "🎲 Deja que el grupo te ponga un apodo",
-  "🔥 Cuenta una anécdota vergonzosa"
+  "🎨 Dibuja con los ojos cerrados lo que diga el jugador de la izquierda: ¿lo han adivinado los demás?",
+  "💪 Haz 10 sentadillas"
 ];
+
 const lastingChallenges = [
   "🗣️ Habla como Siri hasta tu siguiente turno",
   "🚫 No puedes decir 'sí' hasta tu siguiente turno",
@@ -29,6 +30,12 @@ const lastingChallenges = [
   "🗣️ No hables durante una ronda",
   "🦆 Termina todas tus frases con 'Cuack' hasta tu siguiente turno"
 ];
+
+function getRandomChallenge(){
+  return instantChallenges[
+    Math.floor(Math.random() * instantChallenges.length)
+  ];
+}
 
 //fichas en el tablero disponibles
 const availableTokens = ["😈","👻","💀","🤡","👽","🤖","🐸","🐧","🦆","🦈","🐙","🦀",
@@ -285,6 +292,21 @@ function checkCell(player){
 
   if(!type){return;}
 
+  if(type == "reto"){
+
+    const challenge =
+      getRandomChallenge();
+
+    alert(
+      "🎯 RETO\n\n" +
+      challenge
+    );
+
+    return;
+
+  }
+
+  
   alert("Has caído en una casilla " + type);
 
 }
