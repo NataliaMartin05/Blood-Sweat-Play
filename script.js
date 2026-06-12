@@ -380,6 +380,7 @@ function checkCell(player){
     event.text);
 
   return;
+  }
 }
       
 // Enseñamos el reto
