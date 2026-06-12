@@ -323,10 +323,14 @@ function victory(player){
 
 // Checkeamos en que casilla hemos caido
 function checkCell(player){
+
   console.log("CHECK", player.position);
+
   const type = cellTypes[player.position];
 
-  if(!type){return;}
+  if(!type){
+    return;
+  }
 
   if(type == "reto"){
 
@@ -337,59 +341,37 @@ function checkCell(player){
 
     return;
 
-    if(type == "especial"){
+  }
 
-  showEvent(
-    "⭐ CASILLA ESPECIAL ⭐",
-    "Has robado una carta"
-  );
+  if(type == "especial"){
 
-  return;
+    showEvent(
+      "⭐ CASILLA ESPECIAL ⭐",
+      "Has robado una carta"
+    );
 
-}
-
-if(type == "tablero"){
-
-  currentPlayer = player;
-
-  const events = [
-
-    {
-      text:"⬅️ Retrocede 2 casillas",
-      action:"back2"
-    },
-
-    {
-      text:"➡️ Avanza 3 casillas",
-      action:"forward3"
-    }
-
-  ];
-
-  const event =
-    events[
-      Math.floor(Math.random()*events.length)
-    ];
-
-  pendingEvent =
-    event.action;
-
-  showEvent(
-    "♟️ EVENTO ♟️",
-    event.text
-  );
-
-  return;
-
-}
+    return;
 
   }
 
-  
-  alert("Has caído en una casilla " + type);
+  if(type == "tablero"){
 
+    currentPlayer = player;
+
+    const events = [
+
+      {
+        text:"⬅️ Retrocede 2 casillas",
+        action:"back2"
+      },
+
+      {
+        text:"➡️ Avanza 3 casillas",
+        action:"forward
+      }
+   }
 }
-
+      
 // Enseñamos el reto
 function showChallenge(challenge){
   console.log("SHOW CHALLENGE");
