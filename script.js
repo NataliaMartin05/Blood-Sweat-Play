@@ -1,6 +1,35 @@
 let roomCode = "";
 let players = [];
 let cellTypes = {};
+// Listas de retos
+const instantChallenges = [
+  "🍺 Bebe del vaso del jugador de tu izquierda",
+  "📱 Enseña la última foto de tu galería",
+  "📩 Enseña el último mensaje enviado",
+  "🤥 Cuenta dos mentiras y una verdad",
+  "🎤 Imita a un famoso hasta que alguien lo adivine",
+  "🎵 Canta una canción hasta que alguien la adivine",
+  "👀 Mantén contacto visual con alguien durante 10 segundos",
+  "📸 Sube un selfie de grupo a stories",
+  "🧠 Di 5 países en menos de 5 segundos",
+  "🥶 Habla con acento extranjero durante 30 segundos",
+  "💪 Haz 10 sentadillas",
+  "🎲 Deja que el grupo te ponga un apodo",
+  "🔥 Cuenta una anécdota vergonzosa"
+];
+const lastingChallenges = [
+  "🗣️ Habla como Siri hasta tu siguiente turno",
+  "🚫 No puedes decir 'sí' hasta tu siguiente turno",
+  "🚫 No puedes decir 'no' hasta tu siguiente turno",
+  "👑 Llama 'capitán' al jugador de tu derecha hasta tu siguiente turno",
+  "✋ Cada vez que hables debes levantar la mano",
+  "🤖 Habla como un robot hasta tu siguiente turno",
+  "👑 Termina todas tus frases con 'mi rey/reina' hasta tu siguiente turno",
+  "🫵 No señales con el dedo durante una ronda",
+  "🗣️ No hables durante una ronda",
+  "🦆 Termina todas tus frases con 'Cuack' hasta tu siguiente turno"
+];
+
 //fichas en el tablero disponibles
 const availableTokens = ["😈","👻","💀","🤡","👽","🤖","🐸","🐧","🦆","🦈","🐙","🦀",
                          "🦊","🐺","🐼","🦝","🐢","🦖","🍺","🍷","🍕","🍔","🌮","🍩",
@@ -221,6 +250,8 @@ function rollDice(){
       "Has sacado un " + dice;
 
   updateBoard();
+
+  checkCell(player);
   if(player.position == 69){victory(player);}
   return;
 }
@@ -246,4 +277,14 @@ function victory(player){
       origin:{x:Math.random(), y:Math.random()*0.5}, zIndex:99999});},
       i*300);}
       
+}
+
+// Checkeamos en que casilla hemos caido
+function checkCell(player){
+  const type = cellTypes[player.position];
+
+  if(!type){return;}
+
+  alert("Has caído en una casilla " + type);
+
 }
