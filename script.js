@@ -203,5 +203,12 @@ function victory(player){
     .getElementById("victoryPopup")
     .style.display =
       "flex";
-
+  // Explosiones de confetti al ganador
+  for(let i=0;i<5;i++){
+  setTimeout(()=>{
+    confetti({
+      particleCount:100,
+      spread:120,
+      origin:{x:Math.random(), y:Math.random()*0.5}});}, i*300);}
+  
 }
