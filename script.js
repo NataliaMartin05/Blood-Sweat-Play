@@ -209,6 +209,7 @@ function victory(player){
     confetti({
       particleCount:100,
       spread:120,
-      origin:{x:Math.random(), y:Math.random()*0.5}});}, i*300);}
-  
+      origin:{x:Math.random(), y:Math.random()*0.5}, zIndex:99999});},
+      i*300);}
+      
 }
