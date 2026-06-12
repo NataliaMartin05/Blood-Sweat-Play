@@ -367,9 +367,19 @@ function checkCell(player){
 
       {
         text:"➡️ Avanza 3 casillas",
-        action:"forward
+        action:"forward3"
       }
-   }
+   ];
+
+  const event =
+    events[Math.floor(Math.random()*events.length)];
+
+  pendingEvent = event.action;
+
+  showEvent("♟️ EVENTO ♟️",
+    event.text);
+
+  return;
 }
       
 // Enseñamos el reto
