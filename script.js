@@ -46,6 +46,9 @@ const availableTokens = ["😈","👻","💀","🤡","👽","🤖","🐸","🐧"
 let selectedToken = null;
 let currentChallenge = null;
 
+let pendingEvent = null;
+let currentPlayer = null;
+
 // Creamos el codigo de la sala
 function randomCode() {
   const chars =
@@ -258,7 +261,7 @@ function animateMove(player, steps){
         if(player.position >= 69){victory(player);}
         else{checkCell(player);}
         moving = false;},
-      3000);
+      1500);
 
       return;
     } 
@@ -334,6 +337,52 @@ function checkCell(player){
 
     return;
 
+    if(type == "especial"){
+
+  showEvent(
+    "⭐ CASILLA ESPECIAL ⭐",
+    "Has robado una carta"
+  );
+
+  return;
+
+}
+
+if(type == "tablero"){
+
+  currentPlayer = player;
+
+  const events = [
+
+    {
+      text:"⬅️ Retrocede 2 casillas",
+      action:"back2"
+    },
+
+    {
+      text:"➡️ Avanza 3 casillas",
+      action:"forward3"
+    }
+
+  ];
+
+  const event =
+    events[
+      Math.floor(Math.random()*events.length)
+    ];
+
+  pendingEvent =
+    event.action;
+
+  showEvent(
+    "♟️ EVENTO ♟️",
+    event.text
+  );
+
+  return;
+
+}
+
   }
 
   
@@ -371,3 +420,60 @@ function closeChallenge(success){
 
 }
 
+
+function showEvent(title,text){
+  document
+    .getElementById("eventTitle")
+    .innerText = title;
+
+  document
+    .getElementById("eventText")
+    .innerText = text;
+
+  document
+    .getElementById("eventPopup")
+    .style.display = "flex";
+
+}
+
+function closeEvent(){
+  document
+    .getElementById("eventPopup")
+    .style.display =
+      "none";
+
+  if(pendingEvent == "forward3"){animateMove(currentPlayer, 3);}
+
+  if(pendingEvent == "back2"){animateMoveBack(currentPlayer, 2);}
+
+  pendingEvent = null;
+
+}
+
+
+// Funcion de retroceso
+function animateMoveBack(player, steps){
+
+  let moved = 0;
+
+  const interval = setInterval(()=>{
+
+    if(player.position > 0){
+
+      player.position--;
+
+      updateBoard();
+
+    }
+
+    moved++;
+
+    if(moved >= steps){
+
+      clearInterval(interval);
+
+    }
+
+  },350);
+
+}
