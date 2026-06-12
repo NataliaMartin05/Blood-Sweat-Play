@@ -270,8 +270,6 @@ function rollDice(){
   const player =
     players[0];
 
-  player.position += dice;
-
   if(player.position > 69){player.position = 69;} // Evitamos que el jugador se salga del tablero
   // Este comando implica que no hace falta sacar el número justo para entrar, solo el valor igual
   // o mayor a las casillas que faltan (no se rebota)
