@@ -238,12 +238,13 @@ function generateBoardTypes(){
 // Movimiento animado de las fichas
 function animateMove(player, steps){
   let moved = 0;
-  const interval = setInterval(()=>{player.position++;
+  const interval = setInterval(()=>{
+    if(player.position < 69){
+      player.position++;
+      updateBoard();}
+    
     moved++;
-    if(player.position > 69){
-      player.position = 69;}
-
-    updateBoard();
+  
 
     if(moved >= steps ||
       player.position >= 69){
@@ -281,7 +282,6 @@ function rollDice(){
 
   animateMove(player, dice);
   
-  if(player.position == 69){victory(player);}
   return;
 }
 
