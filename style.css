@@ -310,3 +310,26 @@ button{
   }
   100%{box-shadow:none;}
 }
+.flash-normal{
+
+  animation: flashNormal 1.2s ease;
+
+}
+
+@keyframes flashNormal{
+
+  0%{
+    box-shadow:none;
+  }
+
+  50%{
+    box-shadow:
+      0 0 10px rgba(255,255,255,0.25),
+      0 0 20px rgba(255,255,255,0.15);
+  }
+
+  100%{
+    box-shadow:none;
+  }
+
+}
