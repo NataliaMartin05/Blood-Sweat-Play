@@ -462,9 +462,19 @@ function animateMoveBack(player, steps){
 
     if(moved >= steps){
 
-      clearInterval(interval);
+        clearInterval(interval);
 
-    }
+        setTimeout(()=>{
+      
+          flashCell(player.position);
+      
+          setTimeout(()=>{
+            checkCell(player);
+          },600);
+
+  },300);
+
+}
 
   },350);
 
@@ -511,7 +521,7 @@ function flashCell(position){
     return;
   }
 
-  let effect = "";
+  let effect = "flash-normal";
 
   if(position >= 69){
     effect = "flash-meta";
