@@ -2,6 +2,8 @@ let moving = false;
 let roomCode = "";
 let players = [];
 let cellTypes = {};
+const penalties = ["🍺 Bebe 2 tragos","🍺 Bebe 3 tragos","🍺 Termina tu bebida","⬅️ Retrocede 2 casillas"];
+
 // Listas de retos
 const instantChallenges = [
   "🍺 Bebe del vaso del jugador de tu izquierda",
@@ -258,10 +260,20 @@ function animateMove(player, steps){
       clearInterval(interval);
 
       setTimeout(()=>{
-        if(player.position >= 69){victory(player);}
-        else{checkCell(player);}
-        moving = false;},
-      800);
+      
+          flashCell(player.position);
+        
+          setTimeout(()=>{
+        
+            if(player.position >= 69){victory(player);}
+            else{checkCell(player);}
+        
+            moving = false;
+        
+          },600);
+        
+        },
+        800);
 
       return;
     } 
@@ -394,8 +406,9 @@ function closeChallenge(success){
     .style.display =
       "none";
 
-  if(success){alert("😎 Reto completado");}
-  else{alert("🍺 Penalización pendiente");}
+  if(!success){
+    showPenalty();
+  }
 
 }
 
@@ -454,5 +467,82 @@ function animateMoveBack(player, steps){
     }
 
   },350);
+
+}
+
+
+// Enseñamos las penalizaciones
+function showPenalty(){
+  const penalty =
+    penalties[
+      Math.floor(Math.random()*penalties.length)
+    ];
+
+  document
+    .getElementById("penaltyText")
+    .innerText =
+      penalty;
+
+  document
+    .getElementById("penaltyPopup")
+    .style.display =
+      "flex";
+
+}
+
+function closePenalty(){
+  document
+    .getElementById("penaltyPopup")
+    .style.display =
+      "none";
+
+}
+
+
+// Destello casillas
+function flashCell(position){
+
+  const cell =
+    document.getElementById(
+      "cell-" + position
+    );
+
+  if(!cell){
+    return;
+  }
+
+  let effect = "";
+
+  if(position >= 69){
+    effect = "flash-meta";
+  }
+  else{
+
+    const type =
+      cellTypes[position];
+
+    if(type == "reto"){
+      effect = "flash-reto";
+    }
+
+    if(type == "especial"){
+      effect = "flash-especial";
+    }
+
+    if(type == "tablero"){
+      effect = "flash-tablero";
+    }
+
+  }
+
+  if(effect){
+
+    cell.classList.add(effect);
+
+    setTimeout(()=>{
+      cell.classList.remove(effect);
+    },1200);
+
+  }
 
 }
