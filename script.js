@@ -261,7 +261,7 @@ function animateMove(player, steps){
         if(player.position >= 69){victory(player);}
         else{checkCell(player);}
         moving = false;},
-      1500);
+      800);
 
       return;
     } 
