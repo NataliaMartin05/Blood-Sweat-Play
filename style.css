@@ -253,3 +253,60 @@ button{
   font-size:2rem;
 
 }
+
+
+.flash-reto{
+  animation: flashReto 1.2s ease;
+}
+
+.flash-especial{
+  animation: flashEspecial 1.2s ease;
+}
+
+.flash-tablero{
+  animation: flashTablero 1.2s ease;
+}
+
+.flash-meta{
+  animation: flashMeta 1.2s ease;
+}
+
+@keyframes flashReto{
+  0%{box-shadow:none;}
+  50%{
+    box-shadow:
+      0 0 15px #ff4500,
+      0 0 35px #ff4500;
+  }
+  100%{box-shadow:none;}
+}
+
+@keyframes flashEspecial{
+  0%{box-shadow:none;}
+  50%{
+    box-shadow:
+      0 0 15px #ab47bc,
+      0 0 35px #ab47bc;
+  }
+  100%{box-shadow:none;}
+}
+
+@keyframes flashTablero{
+  0%{box-shadow:none;}
+  50%{
+    box-shadow:
+      0 0 15px #dfe9f5,
+      0 0 35px #dfe9f5;
+  }
+  100%{box-shadow:none;}
+}
+
+@keyframes flashMeta{
+  0%{box-shadow:none;}
+  50%{
+    box-shadow:
+      0 0 20px gold,
+      0 0 45px gold;
+  }
+  100%{box-shadow:none;}
+}
