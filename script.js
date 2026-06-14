@@ -2,7 +2,8 @@ let moving = false;
 let roomCode = "";
 let players = [];
 let cellTypes = {};
-const penalties = ["🍺 Bebe 2 tragos","🍺 Bebe 3 tragos","🍺 Termina tu bebida","⬅️ Retrocede 2 casillas"];
+let totalSkips = 0;
+
 
 // Listas de retos
 const instantChallenges = [
@@ -34,6 +35,23 @@ const lastingChallenges = [
   "🦆 Termina todas tus frases con 'Cuack' hasta tu siguiente turno"
 ];
 
+//Lista de penalizaciones
+const penalties = [
+  "🍺 Bebe 2 tragos",
+  "🍺 Bebe 3 tragos",
+  "🍺 Termina tu bebida",
+  {text:"⬅️ Retrocede 2 casillas",
+   action:"back3"},
+  {text:"🚫 Pierdes tu próximo turno",
+   action:"skip"},
+];
+
+const hardPenalties = [
+  {text:"💀 Retrocede 5 casillas", action:"back5"},
+  {text:"💀 Pierdes 2 turnos", action:"skip2"},
+  {text:"💀 Vuelves a la casilla de salida", action:"backStart"}
+];
+
 function getRandomChallenge(){
   return instantChallenges[
     Math.floor(Math.random() * instantChallenges.length)
@@ -50,6 +68,8 @@ let currentChallenge = null;
 
 let pendingEvent = null;
 let currentPlayer = null;
+
+let currentPenalty = null;
 
 // Creamos el codigo de la sala
 function randomCode() {
@@ -74,8 +94,11 @@ function createRoom(){
 
   roomCode = randomCode(); // Se genera el código de sala
 
-  players = [{name: name,
-  position: 0}]; //Se crea un jugador y se guarda su posición inicial (casilla start)
+  players = [{
+  name:name,
+  position:0,
+  skipTurns:0
+}]; //Se crea un jugador y se guarda su posición inicial (casilla start)
 
   document.getElementById("menu").style.display =
     "none";
@@ -289,8 +312,15 @@ function rollDice(){
   const dice =
     Math.floor(Math.random()*6)+1;
 
-  const player =
-    players[0];
+  const player = players[0];
+
+  if(player.skipTurns > 0){player.skipTurns--;
+
+    showEvent("🚫 TURNO PERDIDO 🚫",
+      "Pierdes este turno");
+
+    return;}
+
 
   if(player.position > 69){player.position = 69;} // Evitamos que el jugador se salga del tablero
   // Este comando implica que no hace falta sacar el número justo para entrar, solo el valor igual
@@ -403,6 +433,9 @@ function closeChallenge(success){
       "none";
 
   if(!success){
+
+    totalSkips++;
+
     showPenalty();
   }
 
@@ -479,15 +512,22 @@ function animateMoveBack(player, steps){
 
 // Enseñamos las penalizaciones
 function showPenalty(){
+
+  let availablePenalties;
+
+  if(totalSkips < 5){availablePenalties = penalties;}
+  else{availablePenalties = hardPenalties;}
+  
   const penalty =
-    penalties[
-      Math.floor(Math.random()*penalties.length)
-    ];
+    availablePenalties[Math.floor(Math.random()*availablePenalties.length)];
+
+  currentPenalty =
+    penalty.action;
 
   document
     .getElementById("penaltyText")
     .innerText =
-      penalty;
+      penalty.text;
 
   document
     .getElementById("penaltyPopup")
@@ -495,15 +535,45 @@ function showPenalty(){
       "flex";
 
 }
-
 function closePenalty(){
+
   document
     .getElementById("penaltyPopup")
     .style.display =
       "none";
 
+  const player =
+    players[0];
+
+  if(currentPenalty == "back3"){
+
+    animateMoveBack(player,3);
+
+  }
+
+  if(currentPenalty == "skip"){
+
+    if(!player.skipTurns){
+      player.skipTurns = 0;
+    }
+
+    player.skipTurns++;
+
+  }
+
+  currentPenalty = null;
+
 }
 
+if(currentPenalty == "backStart"){
+
+  player.position = 0;
+
+  updateBoard();
+
+  flashCell(0);
+
+}
 
 // Destello casillas
 function flashCell(position){
