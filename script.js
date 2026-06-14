@@ -40,13 +40,13 @@ const penalties = [
   {text:"🍺 Bebe 3 tragos", action:"drink3"},
   {text:"🍺 Bebe 2 tragos", action:"drink2"},
   {text:"🍺 Termina tu bebida", action:"drinkall"},  
-  {text:"⬅️ Retrocede 2 casillas", action:"back3"},
-  {text:"🚫 Pierdes tu próximo turno", action:"skip"},
+  {text:"⬅️ Retrocede 2 casillas", action:"back2"},
+  //{text:"🚫 Pierdes tu próximo turno", action:"skip"},
 ];
 
 const hardPenalties = [
   {text:"⬅️ Retrocede 5 casillas", action:"back5"},
-  {text:"🚫 Pierdes 2 turnos", action:"skip2"},
+  //{text:"🚫 Pierdes 2 turnos", action:"skip2"},
   {text:"🔄 Vuelves a la casilla de salida", action:"backStart"}
 ];
 
@@ -546,6 +546,11 @@ function closePenalty(){
   if(currentPenalty == "back3"){
 
     animateMoveBack(player,3);
+
+  }
+  if(currentPenalty == "back5"){
+
+    animateMoveBack(player,5);
 
   }
 
