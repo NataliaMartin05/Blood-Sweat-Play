@@ -548,6 +548,13 @@ function closePenalty(){
     animateMoveBack(player,3);
 
   }
+
+  if(currentPenalty == "back2"){
+
+    animateMoveBack(player,2);
+
+  }
+  
   if(currentPenalty == "back5"){
 
     animateMoveBack(player,5);
