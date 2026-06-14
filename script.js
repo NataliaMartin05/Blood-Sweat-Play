@@ -259,21 +259,17 @@ function animateMove(player, steps){
 
       clearInterval(interval);
 
+      flashCell(player.position);
+    
       setTimeout(()=>{
-      
-          flashCell(player.position);
-        
-          setTimeout(()=>{
-        
-            if(player.position >= 69){victory(player);}
-            else{checkCell(player);}
-        
-            moving = false;
-        
-          },600);
-        
-        },
-        800);
+    
+        if(player.position >= 69){victory(player);}
+        else{checkCell(player);}
+    
+        moving = false;
+    
+      },600);
+
 
       return;
     } 
