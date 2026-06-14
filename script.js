@@ -571,11 +571,7 @@ function closePenalty(){
 
   }
 
-  currentPenalty = null;
-
-}
-
-if(currentPenalty == "backStart"){
+  if(currentPenalty == "backStart"){
 
   player.position = 0;
 
@@ -584,6 +580,11 @@ if(currentPenalty == "backStart"){
   flashCell(0);
 
 }
+  
+  currentPenalty = null;
+
+}
+
 
 // Destello casillas
 function flashCell(position){
