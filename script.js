@@ -268,7 +268,7 @@ function animateMove(player, steps){
     
         moving = false;
     
-      },600);
+      },800);
 
 
       return;
