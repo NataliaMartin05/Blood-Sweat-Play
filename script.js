@@ -306,7 +306,7 @@ function createBoard(){
     "4 / span 4";
 
   goal.innerHTML =
-    "M<br>E<br>T<br>A";
+  "<span>M</span><span>E</span><span>T</span><span>A</span>";
 
   board.appendChild(goal);
 
@@ -340,7 +340,7 @@ function createBoard(){
     if(number == 0){
 
       cell.innerHTML =
-        "🧭";
+        "🧭 Start";
 
     }
 
