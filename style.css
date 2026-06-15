@@ -426,3 +426,38 @@ button{
   }
 
 }
+
+.goal{
+
+  background:#111;
+
+  border:3px solid gold;
+
+  box-shadow:
+    0 0 12px gold,
+    0 0 25px orange;
+
+  animation:
+    goalGlow 2s infinite alternate;
+
+}
+
+@keyframes goalGlow{
+
+  from{
+
+    box-shadow:
+      0 0 8px gold,
+      0 0 15px orange;
+
+  }
+
+  to{
+
+    box-shadow:
+      0 0 18px gold,
+      0 0 35px orange;
+
+  }
+
+}
