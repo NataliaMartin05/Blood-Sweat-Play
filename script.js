@@ -744,7 +744,7 @@ function flashCell(position){
 
   let effect = "flash-normal";
 
-  if(position >= 79){
+  if(position >= 80){
     effect = "flash-meta";
   }
   else{
