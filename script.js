@@ -185,198 +185,151 @@ function startGame(){
 
 }
 
+const path = [
+
+{row:11,col:0}, //0
+
+{row:11,col:1}, //1
+{row:11,col:2}, //2
+{row:11,col:3}, //3
+{row:11,col:4}, //4
+{row:11,col:5}, //5
+{row:11,col:6}, //6
+
+{row:10,col:6}, //7
+{row:9,col:6}, //8
+{row:8,col:6}, //9
+{row:7,col:6}, //10
+{row:6,col:6}, //11
+{row:5,col:6}, //12
+{row:4,col:6}, //13
+{row:3,col:6}, //14
+{row:2,col:6}, //15
+{row:1,col:6}, //16
+
+{row:0,col:6}, //17
+{row:0,col:5}, //18
+{row:0,col:4}, //19
+{row:0,col:3}, //20
+{row:0,col:2}, //21
+{row:0,col:1}, //22
+{row:0,col:0}, //23
+
+{row:1,col:0}, //24
+{row:2,col:0}, //25
+{row:3,col:0}, //26
+{row:4,col:0}, //27
+{row:5,col:0}, //28
+{row:6,col:0}, //29
+{row:7,col:0}, //30
+{row:8,col:0}, //31
+{row:9,col:0}, //32
+{row:10,col:0}, //33
+
+{row:10,col:1}, //34
+{row:10,col:2}, //35
+{row:10,col:3}, //36
+{row:10,col:4}, //37
+{row:10,col:5}, //38
+
+{row:9,col:5}, //39
+{row:8,col:5}, //40
+{row:7,col:5}, //41
+{row:6,col:5}, //42
+{row:5,col:5}, //43
+{row:4,col:5}, //44
+{row:3,col:5}, //45
+{row:2,col:5}, //46
+{row:1,col:5}, //47
+
+{row:1,col:4}, //48
+{row:1,col:3}, //49
+{row:1,col:2}, //50
+{row:1,col:1}, //51
+
+{row:2,col:1}, //52
+{row:3,col:1}, //53
+{row:4,col:1}, //54
+{row:5,col:1}, //55
+{row:6,col:1}, //56
+{row:7,col:1}, //57
+{row:8,col:1}, //58
+{row:9,col:1}, //59
+
+{row:9,col:2}, //60
+{row:9,col:3}, //61
+{row:9,col:4}, //62
+
+{row:8,col:4}, //63
+{row:7,col:4}, //64
+{row:6,col:4}, //65
+{row:5,col:4}, //66
+{row:4,col:4}, //67
+{row:3,col:4}, //68
+{row:2,col:4}, //69
+
+{row:2,col:3}, //70
+{row:2,col:2}, //71
+
+{row:3,col:2}, //72
+{row:4,col:2}, //73
+{row:5,col:2}, //74
+{row:6,col:2}, //75
+{row:7,col:2}, //76
+
+{row:8,col:2}, //77
+{row:8,col:3}, //78
+
+{row:7,col:3}  //79
+
+];
+
 function createBoard(){
 
-const board =
-  document.getElementById("board");
+  const board =
+    document.getElementById("board");
 
-board.innerHTML = "";
+  board.innerHTML = "";
 
-board.style.gridTemplateColumns =
-  "repeat(7,1fr)";
+  // META
+  const goal =
+    document.createElement("div");
 
-board.style.gridTemplateRows =
-  "repeat(12,1fr)";
+  goal.id = "cell-80";
 
-let matrix = [];
+  goal.className =
+    "goal-cell";
 
-for(let row=0;row<12;row++){
+  goal.style.gridColumn = "4";
 
-  matrix[row]=[];
+  goal.style.gridRow =
+    "4 / span 4";
 
-  for(let col=0;col<7;col++){
+  goal.innerHTML =
+    "M<br>E<br>T<br>A";
 
-    matrix[row][col]=null;
+  board.appendChild(goal);
 
-  }
-
-}
-
-
-// META
-for(let row=4;row<=7;row++){
-
-  matrix[row][3]="META";
-
-}
-
-
-// CARACOL
-
-let top=0;
-
-let bottom=11;
-
-let left=0;
-
-let right=6;
-
-let number=0;
-
-
-while(number<=79){
-
-  // izquierda → derecha
-
-  for(
-    let col=left;
-    col<=right && number<=79;
-    col++
-  ){
-
-    if(matrix[top][col]==null){
-
-      matrix[top][col]=number++;
-
-    }
-
-  }
-
-  top++;
-
-
-  // arriba → abajo
-
-  for(
-    let row=top;
-    row<=bottom && number<=79;
-    row++
-  ){
-
-    if(matrix[row][right]==null){
-
-      matrix[row][right]=number++;
-
-    }
-
-  }
-
-  right--;
-
-
-  // derecha → izquierda
-
-  for(
-    let col=right;
-    col>=left && number<=79;
-    col--
-  ){
-
-    if(matrix[bottom][col]==null){
-
-      matrix[bottom][col]=number++;
-
-    }
-
-  }
-
-  bottom--;
-
-
-  // abajo → arriba
-
-  for(
-    let row=bottom;
-    row>=top && number<=79;
-    row--
-  ){
-
-    if(matrix[row][left]==null){
-
-      matrix[row][left]=number++;
-
-    }
-
-  }
-
-  left++;
-
-}
-
-
-
-// DIBUJAR TABLERO
-
-for(let row=0;row<12;row++){
-
-  for(let col=0;col<7;col++){
-
-    const value =
-      matrix[row][col];
-
-    if(value==null){
-
-      continue;
-
-    }
+  // CASILLAS
+  path.forEach((position,number)=>{
 
     const cell =
       document.createElement("div");
 
+    cell.className =
+      "cell";
 
-    // META
+    cell.id =
+      "cell-" + number;
 
-    if(value=="META"){
+    cell.style.gridColumn =
+      position.col + 1;
 
-      if(row==4){
-
-        cell.id="cell-80";
-
-        cell.className="goal-cell";
-
-        cell.style.gridRow=
-          "5 / span 4";
-
-        cell.style.gridColumn=
-          "4";
-
-        cell.innerHTML=
-          "M<br>E<br>T<br>A";
-
-        board.appendChild(cell);
-
-      }
-
-      continue;
-
-    }
-
-
-    cell.className="cell";
-
-    cell.id="cell-"+value;
-
-    cell.innerHTML=
-
-      value==0
-
-      ? "🧭 Start"
-
-      : value;
-
+    cell.style.gridRow =
+      position.row + 1;
 
     const type =
-      cellTypes[value];
+      cellTypes[number];
 
     if(type){
 
@@ -384,21 +337,25 @@ for(let row=0;row<12;row++){
 
     }
 
+    if(number == 0){
 
-    cell.style.gridRow=
-      row+1;
+      cell.innerHTML =
+        "🧭";
 
-    cell.style.gridColumn=
-      col+1;
+    }
+
+    else{
+
+      cell.innerHTML =
+        number;
+
+    }
 
     board.appendChild(cell);
 
-  }
+  });
 
 }
-
-}
-
 function updateBoard(){
 
   document
@@ -428,8 +385,8 @@ function generateBoardTypes(){
   cellTypes = {};
   let availableCells = [];
 
-  // Casillas 1-69
-  for(let i=1;i<=69;i++){
+  // Casillas 1-79
+  for(let i=1;i<=79;i++){
     availableCells.push(i);
   }
 
@@ -445,9 +402,9 @@ function generateBoardTypes(){
       availableCells.splice(randomIndex,1);
     }
   }
-  assign("reto",25);
-  assign("especial",18);
-  assign("tablero",10);
+  assign("reto",28);
+  assign("especial",20);
+  assign("tablero",13);
 }
 
 // Movimiento animado de las fichas
@@ -455,7 +412,7 @@ function animateMove(player, steps){
   console.log("ANIMATE", steps);
   let moved = 0;
   const interval = setInterval(()=>{
-    if(player.position < 70){
+    if(player.position < 80){
       player.position++;
       updateBoard();}
     
@@ -463,7 +420,7 @@ function animateMove(player, steps){
   
 
     if(moved >= steps ||
-      player.position >= 70){
+      player.position >= 80){
 
       clearInterval(interval);
 
@@ -471,7 +428,7 @@ function animateMove(player, steps){
     
       setTimeout(()=>{
     
-        if(player.position >= 70){victory(player);}
+        if(player.position >= 80){victory(player);}
         else{checkCell(player);}
     
         moving = false;
@@ -507,7 +464,7 @@ function rollDice(){
     return;}
 
 
-  if(player.position > 70){player.position = 70;} // Evitamos que el jugador se salga del tablero
+  if(player.position > 80){player.position = 80;} // Evitamos que el jugador se salga del tablero
   // Este comando implica que no hace falta sacar el número justo para entrar, solo el valor igual
   // o mayor a las casillas que faltan (no se rebota)
   
