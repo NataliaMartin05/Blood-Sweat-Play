@@ -29,25 +29,23 @@ button{
 
 #board{
 
-display:grid;
+  display:grid;
 
-grid-template-columns:
-repeat(9,1fr);
+  grid-template-columns:repeat(7,1fr);
 
-grid-template-rows:
-repeat(10,1fr);
+  grid-template-rows:repeat(12,1fr);
 
-width:95vw;
+  width:95vw;
 
-height:82vh;
+  max-width:430px;
 
-max-width:500px;
+  height:82vh;
 
-margin:auto;
+  margin:auto;
 
-justify-content:center;
+  padding:6px;
 
-align-content:center;
+  gap:4px;
 
 }
 
@@ -485,60 +483,42 @@ align-content:center;
 
 }
 
-.goal{
+.goal-cell{
 
-grid-column:4 / span 3;
+  grid-column:4;
 
-grid-row:4 / span 4;
+  grid-row:5 / span 4;
 
-display:flex;
+  display:flex;
 
-justify-content:center;
+  justify-content:center;
 
-align-items:center;
+  align-items:center;
 
-font-size:55px;
+  text-align:center;
 
-background:#111;
+  font-size:22px;
 
-border:3px solid gold;
+  line-height:1.4;
 
-border-radius:25px;
+  font-weight:bold;
 
-z-index:5;
+  background:#111;
 
-box-shadow:
+  border:3px solid gold;
 
-0 0 12px gold,
+  border-radius:22px;
 
-0 0 25px orange;
+  z-index:5;
 
-animation:
+  box-shadow:
 
-goalGlow 2s infinite alternate;
+    0 0 12px gold,
 
-}
+    0 0 25px orange;
 
-.ring-1{
+  animation:
 
-  margin:1px;
-
-}
-
-.ring-2{
-
-  margin:2px;
-
-}
-
-.ring-3{
-
-  margin:3px;
-
-}
-
-.ring-4{
-
-  margin:4px;
+    goalGlow 2s infinite alternate;
 
 }
