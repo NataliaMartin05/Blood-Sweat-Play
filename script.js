@@ -187,160 +187,217 @@ function startGame(){
 
 function createBoard(){
 
-  const board =
-    document.getElementById("board");
+const board =
+  document.getElementById("board");
 
-  board.innerHTML = "";
+board.innerHTML = "";
 
-  board.style.gridTemplateColumns =
-    "repeat(9,1fr)";
+board.style.gridTemplateColumns =
+  "repeat(7,1fr)";
 
-  board.style.gridTemplateRows =
-    "repeat(10,1fr)";
+board.style.gridTemplateRows =
+  "repeat(12,1fr)";
 
-  // Matriz vacía 10x9
-  let matrix = [];
+let matrix = [];
 
-  for(let row=0;row<10;row++){
+for(let row=0;row<12;row++){
 
-    matrix[row] = [];
+  matrix[row]=[];
 
-    for(let col=0;col<9;col++){
+  for(let col=0;col<7;col++){
 
-      matrix[row][col] = null;
-
-    }
-
-  }
-
-  // Espiral
-  let top = 0;
-  let bottom = 9;
-
-  let left = 0;
-  let right = 8;
-
-  let number = 0;
-
-  while(number <= 69){
-
-    // izquierda → derecha
-    for(let col=left;col<=right && number<=69;col++){
-
-      matrix[top][col] = number++;
-
-    }
-
-    top++;
-
-    // arriba → abajo
-    for(let row=top;row<=bottom && number<=69;row++){
-
-      matrix[row][right] = number++;
-
-    }
-
-    right--;
-
-    // derecha → izquierda
-    for(let col=right;col>=left && number<=69;col--){
-
-      matrix[bottom][col] = number++;
-
-    }
-
-    bottom--;
-
-    // abajo → arriba
-    for(let row=bottom;row>=top && number<=69;row--){
-
-      matrix[row][left] = number++;
-
-    }
-
-    left++;
-
-  }
-
-  // Pintar tablero
-  for(let row=0;row<10;row++){
-
-    for(let col=0;col<9;col++){
-
-      const value = matrix[row][col];
-
-      // Centro = META
-      if(
-        row >= 3 &&
-        row <= 6 &&
-        col >= 3 &&
-        col <= 5
-      ){
-
-        // Solo una vez
-        if(row == 4 && col == 4){
-
-          const goal =
-            document.createElement("div");
-
-          goal.id = "cell-70";
-
-          goal.className = "goal";
-
-          goal.style.gridColumn = "4 / span 3";
-
-          goal.style.gridRow = "4 / span 4";
-          
-          goal.innerHTML =
-            "🏆";
-
-          board.appendChild(goal);
-
-        }
-
-        continue;
-
-      }
-
-      if(value == null){
-
-        continue;
-
-      }
-
-      const cell = document.createElement("div");
-
-      cell.className =
-        "cell";
-      
-      cell.id =
-        "cell-" + value;
-      
-      cell.innerHTML = value;
-
-      const type = cellTypes[value];
-      
-      if(type){cell.classList.add(type);}
-      
-      // Calculamos el anillo de la espiral
-      const ring = Math.min(
-        row,
-        col,
-        9-row,
-        8-col
-      );
-      
-      // Guardamos el anillo
-      cell.classList.add("ring-" + ring);
-      
-      board.appendChild(cell);
-      
-    }
+    matrix[row][col]=null;
 
   }
 
 }
 
+
+// META
+for(let row=4;row<=7;row++){
+
+  matrix[row][3]="META";
+
+}
+
+
+// CARACOL
+
+let top=0;
+
+let bottom=11;
+
+let left=0;
+
+let right=6;
+
+let number=0;
+
+
+while(number<=79){
+
+  // izquierda → derecha
+
+  for(
+    let col=left;
+    col<=right && number<=79;
+    col++
+  ){
+
+    if(matrix[top][col]==null){
+
+      matrix[top][col]=number++;
+
+    }
+
+  }
+
+  top++;
+
+
+  // arriba → abajo
+
+  for(
+    let row=top;
+    row<=bottom && number<=79;
+    row++
+  ){
+
+    if(matrix[row][right]==null){
+
+      matrix[row][right]=number++;
+
+    }
+
+  }
+
+  right--;
+
+
+  // derecha → izquierda
+
+  for(
+    let col=right;
+    col>=left && number<=79;
+    col--
+  ){
+
+    if(matrix[bottom][col]==null){
+
+      matrix[bottom][col]=number++;
+
+    }
+
+  }
+
+  bottom--;
+
+
+  // abajo → arriba
+
+  for(
+    let row=bottom;
+    row>=top && number<=79;
+    row--
+  ){
+
+    if(matrix[row][left]==null){
+
+      matrix[row][left]=number++;
+
+    }
+
+  }
+
+  left++;
+
+}
+
+
+
+// DIBUJAR TABLERO
+
+for(let row=0;row<12;row++){
+
+  for(let col=0;col<7;col++){
+
+    const value =
+      matrix[row][col];
+
+    if(value==null){
+
+      continue;
+
+    }
+
+    const cell =
+      document.createElement("div");
+
+
+    // META
+
+    if(value=="META"){
+
+      if(row==4){
+
+        cell.id="cell-80";
+
+        cell.className="goal-cell";
+
+        cell.style.gridRow=
+          "5 / span 4";
+
+        cell.style.gridColumn=
+          "4";
+
+        cell.innerHTML=
+          "M<br>E<br>T<br>A";
+
+        board.appendChild(cell);
+
+      }
+
+      continue;
+
+    }
+
+
+    cell.className="cell";
+
+    cell.id="cell-"+value;
+
+    cell.innerHTML=
+
+      value==0
+
+      ? "🧭 Start"
+
+      : value;
+
+
+    const type =
+      cellTypes[value];
+
+    if(type){
+
+      cell.classList.add(type);
+
+    }
+
+
+    cell.style.gridRow=
+      row+1;
+
+    cell.style.gridColumn=
+      col+1;
+
+    board.appendChild(cell);
+
+  }
+
+}
+
+}
 
 function updateBoard(){
 
