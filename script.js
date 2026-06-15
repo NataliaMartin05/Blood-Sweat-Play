@@ -191,7 +191,7 @@ function createBoard(){
 
   board.innerHTML = "";
 
-  for(let i=69;i>=0;i--){
+  for(let i=70;i>=0;i--){
 
     const cell =
       document.createElement("div");
@@ -205,6 +205,8 @@ function createBoard(){
     cell.id = "cell-" + i;
 
     cell.innerHTML = i;
+
+    if(i == 70){cell.innerHTML = "🏆"; cell.classList.add("goal");}
 
     board.appendChild(cell);
 
@@ -268,7 +270,7 @@ function animateMove(player, steps){
   console.log("ANIMATE", steps);
   let moved = 0;
   const interval = setInterval(()=>{
-    if(player.position < 69){
+    if(player.position < 70){
       player.position++;
       updateBoard();}
     
@@ -276,7 +278,7 @@ function animateMove(player, steps){
   
 
     if(moved >= steps ||
-      player.position >= 69){
+      player.position >= 70){
 
       clearInterval(interval);
 
@@ -284,7 +286,7 @@ function animateMove(player, steps){
     
       setTimeout(()=>{
     
-        if(player.position >= 69){victory(player);}
+        if(player.position >= 70){victory(player);}
         else{checkCell(player);}
     
         moving = false;
@@ -320,7 +322,7 @@ function rollDice(){
     return;}
 
 
-  if(player.position > 69){player.position = 69;} // Evitamos que el jugador se salga del tablero
+  if(player.position > 70){player.position = 70;} // Evitamos que el jugador se salga del tablero
   // Este comando implica que no hace falta sacar el número justo para entrar, solo el valor igual
   // o mayor a las casillas que faltan (no se rebota)
   
