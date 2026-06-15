@@ -285,9 +285,12 @@ function createBoard(){
 
           goal.id = "cell-70";
 
-          goal.className =
-            "goal-cell";
+          goal.className = "goal";
 
+          goal.style.gridColumn = "4 / span 3";
+
+          goal.style.gridRow = "4 / span 4";
+          
           goal.innerHTML =
             "🏆";
 
@@ -305,129 +308,39 @@ function createBoard(){
 
       }
 
-      const cell =
-        document.createElement("div");
+      const cell = document.createElement("div");
 
       cell.className =
         "cell";
-
+      
       cell.id =
         "cell-" + value;
+      
+      cell.innerHTML = value;
 
-      const type =
-        cellTypes[value];
-
-      if(type){
-
-        cell.classList.add(type);
-
-      }
-
-      cell.innerHTML =
-        value;
-
+      const type = cellTypes[value];
+      
+      if(type){cell.classList.add(type);}
+      
+      // Calculamos el anillo de la espiral
+      const ring = Math.min(
+        row,
+        col,
+        9-row,
+        8-col
+      );
+      
+      // Guardamos el anillo
+      cell.classList.add("ring-" + ring);
+      
       board.appendChild(cell);
-
+      
     }
 
   }
 
 }
-function getBoardPosition(number){
 
-const map = {
-
-0:{row:11,col:1},
-
-1:{row:11,col:2},
-2:{row:11,col:3},
-3:{row:11,col:4},
-4:{row:11,col:5},
-5:{row:11,col:6},
-6:{row:11,col:7},
-7:{row:11,col:8},
-
-8:{row:10,col:8},
-9:{row:9,col:8},
-10:{row:8,col:8},
-11:{row:7,col:8},
-12:{row:6,col:8},
-13:{row:5,col:8},
-14:{row:4,col:8},
-15:{row:3,col:8},
-16:{row:2,col:8},
-17:{row:1,col:8},
-
-18:{row:1,col:7},
-19:{row:1,col:6},
-20:{row:1,col:5},
-21:{row:1,col:4},
-22:{row:1,col:3},
-23:{row:1,col:2},
-24:{row:1,col:1},
-
-25:{row:2,col:1},
-26:{row:3,col:1},
-27:{row:4,col:1},
-28:{row:5,col:1},
-29:{row:6,col:1},
-30:{row:7,col:1},
-31:{row:8,col:1},
-32:{row:9,col:1},
-33:{row:10,col:1},
-
-34:{row:10,col:2},
-35:{row:10,col:3},
-36:{row:10,col:4},
-37:{row:10,col:5},
-38:{row:10,col:6},
-39:{row:10,col:7},
-
-40:{row:9,col:7},
-41:{row:8,col:7},
-42:{row:7,col:7},
-43:{row:6,col:7},
-44:{row:5,col:7},
-45:{row:4,col:7},
-46:{row:3,col:7},
-
-47:{row:2,col:7},
-48:{row:2,col:6},
-49:{row:2,col:5},
-50:{row:2,col:4},
-51:{row:2,col:3},
-52:{row:2,col:2},
-
-53:{row:3,col:2},
-54:{row:4,col:2},
-55:{row:5,col:2},
-56:{row:6,col:2},
-57:{row:7,col:2},
-58:{row:8,col:2},
-59:{row:9,col:2},
-
-60:{row:9,col:3},
-61:{row:9,col:4},
-62:{row:9,col:5},
-63:{row:9,col:6},
-
-64:{row:8,col:6},
-65:{row:7,col:6},
-66:{row:6,col:6},
-
-67:{row:5,col:6},
-
-68:{row:4,col:6},
-
-69:{row:4,col:5},
-
-70:{row:5,col:4}
-
-};
-
-return map[number];
-
-}
 
 function updateBoard(){
 
